@@ -21,3 +21,14 @@
    用于解析标签（包括：标签属性、标签体内容、绑定事件）
 
    例：`v-bind:href="xxx"` 或简写为`:href="xxx"`
+
+
+
+### 三、数据绑定
+
+1. 单向绑定v-bind：数据只能从data流向页面
+2. 双向绑定v-model：data <===> 页面，双向
+
+注：双向绑定一般应用在表单类元素上（input、select等）
+
+​		`v-model:value`可以简写为`v-model`，因为它默认收集的就是value的值
