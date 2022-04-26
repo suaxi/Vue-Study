@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Vue</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="root">
+            <h1>你好，{{name}}</h1>
+        </div>
+
+        <script type="text/javascript">
+            //关闭开发环境提示
+            Vue.config.productionTip = false
+
+            //创建Vue实例
+            new Vue({
+                //指定当前实例为哪个容器服务
+                el: '#root',
+                data: {
+                    name: '孙笑川'
+                }
+            })
+        </script>
+    </body>
+</html>
