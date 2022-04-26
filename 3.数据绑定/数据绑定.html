@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据绑定</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    <!-- 普通写法 -->
+<!--    单向数据绑定：<input type="text" v-bind:value="name">-->
+<!--    <br>-->
+<!--    双向数据绑定：<input type="text" v-model:value="name">-->
+
+    <!-- 简写 -->
+    单向数据绑定：<input type="text" :value="name">
+    <br>
+    双向数据绑定：<input type="text" v-model="name">
+</div>
+
+<script type="text/javascript">
+    //关闭开发环境提示
+    Vue.config.productionTip = false
+
+    //创建Vue实例
+    new Vue({
+        //指定当前实例为哪个容器服务
+        el: '#root',
+        data: {
+            name: '孙笑川'
+        }
+    })
+</script>
+</body>
+</html>
