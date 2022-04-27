@@ -58,3 +58,19 @@
 3. VM：ViewModel视图模型，Vue实例对象
 
 data中所有的属性，最后都出现在了vm身上；vm身上所有的属性及Vue原型上的所有属性，在Vue模板中都可以直接使用
+
+
+
+### 六、数据代理
+
+1. Vue中的数据代理：
+
+   通过vm对象来代理data对象中属性的操作（读/写）
+
+2. 优点：
+
+   方便操作data中的数据
+
+3. 基本原理：
+
+   通过Object.defineProperty()把data对象中所有属性添加到vm上，同时指定getter/setter，在getter/setter内部去操作（读/写）data中对应的属性

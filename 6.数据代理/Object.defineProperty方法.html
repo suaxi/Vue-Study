@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据代理</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+</div>
+
+<script type="text/javascript">
+    let num = 33;
+    let person = {
+        name: '孙笑川'
+    }
+
+    Object.defineProperty(person, 'age', {
+        // value: 33,
+        // //控制属性是否可以枚举，默认值false
+        // enumerable: true,
+        // //控制属性是否可以被修改，默认值false
+        // writable: true,
+        // //控制属性是否可以被删除，默认值false
+        // configurable: true
+
+        //当读取age属性时，get函数(getter)就会被调用，且返回值就是age的值
+        get() {
+            console.log("age属性被读取了");
+            return num;
+        },
+
+        //当修改age属性时，set函数(setter)就会被调用，同时收到修改的具体值
+        set(value) {
+            console.log("age属性被修改了，值为：", value);
+            num = value
+        },
+    })
+
+    console.log(person)
+</script>
+</body>
+</html>
