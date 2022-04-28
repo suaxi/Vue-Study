@@ -74,3 +74,47 @@ data中所有的属性，最后都出现在了vm身上；vm身上所有的属性
 3. 基本原理：
 
    通过Object.defineProperty()把data对象中所有属性添加到vm上，同时指定getter/setter，在getter/setter内部去操作（读/写）data中对应的属性
+
+
+
+### 七、事件处理
+
+> 事件的基本使用
+
+1. 使用`v-on:click="xxx"` 或`@click="xxx"`绑定事件，xxx是事件名
+2. 事件的回调需要配置在methods对象中，最终会在vm上
+3. methods中配置的函数，不要用箭头函数，this的作用域会被改变
+4. methods中配置的函数都是是被Vue所管理的函数，this的指向是vm或组件实例对象
+5. `@click="xxx"` 和 `@click="xxx($event)"` 的作用一样，后者可以传参
+
+
+
+> 事件修饰符
+
+1. prevent：阻止默认事件（常用）；
+2. stop：阻止事件冒泡（常用）；
+3. once：事件只触发一次（常用）；
+4. capture：使用事件的捕获模式；
+5. self：只有event.target是当前操作的元素时才触发事件；
+6. passive：事件的默认行为立即执行，无需等待事件回调执行完毕；
+
+
+
+> 键盘事件
+
+1. 常用的按键别名
+   + 回车 enter
+   + 删除 delete （捕获”删除“和”退格“按键）
+   + 退出 esc
+   + 空格 space
+   + 换行 tab（必须配合`keydown`使用）
+   + 上 up
+   + 下 down
+   + 左 left
+   + 右 right
+2. Vue未提供别名的按键，可以使用原始的key值绑定，需转换为kebab-case（短横线命名）
+3. 系统修饰键：ctrl、alt、shift、meta
+   1. 配合keyup使用：按下修饰键的同时，再按下其他键，随后释放其他键，事件才被触发
+   2. 配合keydown使用：正常触发事件
+4. 可以使用keycode指定具体的按键
+5. `Vue.config.keyCode.自定义键名 = 键码`，可以定制按键别名

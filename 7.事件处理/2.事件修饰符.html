@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件修饰符</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+        *{
+          margin-top: 20px;
+        }
+        .demo{
+            height: 50px;
+            background-color: skyblue;
+        }
+        .box{
+            padding: 5px;
+            background-color: skyblue;
+        }
+        .box1{
+            padding: 5px;
+            background-color: lightpink;
+        }
+        .list{
+            width: 200px;
+            height: 200px;
+            background-color: azure;
+            overflow: auto;
+        }
+        li{
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    <h2>你好，{{name}}</h2>
+    <!-- 阻止默认事件 -->
+    <a href="https://www.wangchouchou.com" @click.prevent="showInfo">点我提示信息</a>
+
+    <!-- 阻止事件冒泡 -->
+    <div class="demo" @click="showInfo">
+        <button @click.prevent.stop="showInfo">点我提示信息</button>
+        <!-- 先阻止默认事件，再阻止冒泡事件（修饰符可以连续写） -->
+        <!---- <a @click.prevent.stop="showInfo">点我提示信息</a> -->
+    </div>
+
+    <!-- 事件只触发一次 -->
+    <button @click.once="showInfo">点我提示信息</button>
+    <!-- 使用事件的捕获模式 -->
+    <div class="box" @click.capture="showMsg(1)">
+        div1
+        <div class="box1" @click="showMsg(2)">
+            div2
+        </div>
+    </div>
+
+    <!-- 只有event.target是当前操作的元素时才触发事件 -->
+    <div class="demo" @click.self="showInfo">
+        <button @click="showInfo">点我提示信息</button>
+    </div>
+
+    <!-- 事件的默认行为立即执行，无需等待事件回调执行完毕 -->
+    <!-- wheel 鼠标滚轮
+         scroll 滚动条
+     -->
+    <ul class="list" @wheel.passive="demo">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    //关闭开发环境提示
+    Vue.config.productionTip = false
+
+    //创建Vue实例
+    new Vue({
+        el: '#root',
+        data: {
+            name: '孙笑川'
+        },
+        methods: {
+            showInfo(e) {
+                //阻止事件默认行为，此处为点击后不跳转
+                //e.preventDefault();
+                alert("抽象！");
+                console.log(e.target)
+            },
+            showMsg(msg) {
+                console.log(msg)
+            },
+            demo() {
+                for (let i = 0; i < 100000; i++) {
+                    console.log('@')
+                }
+                console.log("循环执行完毕")
+            }
+        }
+    })
+</script>
+</body>
+</html>
