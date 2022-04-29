@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>姓名案例_watch实现</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    姓：<input type="text" v-model="firstName"> <br><br>
+    名：<input type="text" v-model="lastName"> <br><br>
+    姓名：<span>{{fullName}}</span>
+</div>
+
+<script type="text/javascript">
+    //关闭开发环境提示
+    Vue.config.productionTip = false
+
+    //创建Vue实例
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            firstName: '张',
+            lastName: '三',
+            fullName: '张-三'
+        },
+        watch: {
+            firstName(newValue) {
+                //定时器指定的回调不是Vue实例管理的，此处可以用箭头函数
+                setTimeout(() => {
+                    this.fullName = newValue + '-' + this.lastName
+                }, 1000)
+            },
+            lastName(newValue) {
+                this.fullName = this.firstName + '-' + newValue
+            }
+        }
+    })
+</script>
+</body>
+</html>
