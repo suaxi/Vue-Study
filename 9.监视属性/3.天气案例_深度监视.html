@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>天气案例_深度监视</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    <h2>今天天气很{{info}}</h2> <br>
+    <button @click="changeWeather">切换天气</button>
+    <hr>
+    <h3>a的值是：{{numbers.a}}</h3>
+    <button @click="numbers.a++">点我执行a + 1</button>
+    <h3>b的值是：{{numbers.b}}</h3>
+    <button @click="numbers.b++">点我执行b + 1</button>
+</div>
+
+<script type="text/javascript">
+    //关闭开发环境提示
+    Vue.config.productionTip = false
+
+    //创建Vue实例
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            isHot: true,
+            numbers: {
+                a: 1,
+                b: 2
+            }
+        },
+        computed: {
+            info() {
+                return this.isHot ? '炎热' : '凉爽';
+            }
+        },
+        methods: {
+            changeWeather() {
+                this.isHot = !this.isHot;
+            }
+        },
+        watch: {
+            //当isHot发生改变时，handler被调用
+            isHot: {
+                //immediate: true, //初始化时调用handler
+                handler(newValue, oldValue) {
+                    console.log('isHot被修改了', newValue, oldValue)
+                }
+            },
+            //监视多级结构中某个属性的变化
+            /* 'numbers.a': {
+                handler() {
+                    console.log('a的值改变了')
+                }
+            } */
+            //监视多级结构中所有属性的变化
+            numbers: {
+                //深度监视
+                deep: true,
+                handler() {
+                    console.log('numbers的值改变了')
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>
