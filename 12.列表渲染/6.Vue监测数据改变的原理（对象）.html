@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue监测数据改变的原理（对象）</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    <h2>姓名：{{name}}</h2>
+    <h2>年龄：{{33}}</h2>
+</div>
+
+<script type="text/javascript">
+    //关闭开发环境提示
+    Vue.config.productionTip = false
+
+    //创建Vue实例
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            name: '孙笑川',
+            age: 33
+        }
+    })
+</script>
+</body>
+</html>
