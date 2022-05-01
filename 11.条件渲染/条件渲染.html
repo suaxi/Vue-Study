@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条件渲染</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    <!-- 使用v-show作条件渲染 -->
+    <!-- <h2 v-show="false">你好，{{name}}</h2> -->
+    <!-- <h2 v-show="1 === 3">你好，{{name}}</h2> -->
+
+    <!-- 使用v-if作条件渲染 -->
+     <h2 v-if="false">你好，{{name}}</h2>
+     <h2 v-if="1 === 1">你好，{{name}}</h2>
+
+    <h2>当前的n值是：{{n}}</h2>
+    <button @click="n++">点我n+1</button>
+
+    <!-- v-else和v-else-if -->
+    <div v-if="n === 1">Angular</div>
+    <div v-else-if="n === 2">React</div>
+    <div v-else-if="n === 3">Vue</div>
+    <div v-else>测试</div>
+
+    <template v-if="n === 1">
+        <h2>孙笑川</h2>
+        <h2>刘波</h2>
+        <h2>Giao哥</h2>
+    </template>
+</div>
+
+<script type="text/javascript">
+    //关闭开发环境提示
+    Vue.config.productionTip = false
+
+    //创建Vue实例
+    new Vue({
+        el: '#root',
+        data: {
+            name: '孙笑川',
+            n: 0
+        }
+    })
+</script>
+</body>
+</html>
