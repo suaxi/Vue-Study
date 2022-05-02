@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+    <style>
+        .demo {
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+<button id="btn">创建一个输入框</button>
+<script type="text/javascript">
+    const btn = document.getElementById('btn');
+    btn.onclick = () => {
+        const input = document.createElement('input');
+        input.className = 'demo'
+        input.value = 100;
+        input.onclick = () => {
+            alert('你好，孙笑川');
+        }
+        document.body.appendChild(input);
+        input.focus()
+    }
+</script>
+</body>
+</html>
