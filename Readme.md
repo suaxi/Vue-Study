@@ -290,7 +290,24 @@ v-for指令：
 
 4. 修改数组元素的方法
 
-   1. API：`push(),pop(),shift(),unshift(),ssplice(),sort(),reverse()`
-   2. `Vue.set()`或`vm.$set`
+   （1）API：`push(),pop(),shift(),unshift(),ssplice(),sort(),reverse()`
+
+   （2）`Vue.set()`或`vm.$set`
 
    注：`Vue.set()`或`vm.$set` **不能**给`vm`或`vm`的根数据对象添加属性
+
+
+
+### 十三、过滤器
+
+定义：对要显示的数据进行特点格式化后再显示
+
+语法：
+
+1. 注册过滤器：`Vue.filter(name,callback)` 或 `new Vue(filters:{})`
+2. 使用：`{{xxx | filterName}}`（全局注册） 或 `v-bind:xxx="xxx | filterName"` （局部过滤器）
+
+注：
+
+1. 过滤器可以接受额外的参数，多个过滤器可以串联（使用管道符 `|`连接 ），并按顺序执行
+2. 没有改变原有的数据，是产生新的对应的数据
