@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-text指令</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<!--
+v-bind：单向绑定，可简写为:xxx
+v-model：双向数据绑定
+v-for：遍历数组、对象、字符串
+v-on：绑定事件监听，可简写为@
+v-if：条件渲染
+v-else：同理
+v-show：同理
+-->
+<div id="root">
+    <div>你好，{{name}}</div>
+    <div v-text="name">你好，</div>
+    <div v-text="str"></div>
+</div>
+
+<script type="text/javascript">
+    //关闭开发环境提示
+    Vue.config.productionTip = false
+
+    //创建Vue实例
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            name: '孙笑川',
+            str: '<h3>孙笑川</h3>'
+        }
+    })
+</script>
+</body>
+</html>
