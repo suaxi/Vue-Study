@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分析生命周期</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    <h2>当前的n值是：{{n}}</h2>
+    <button @click="add">点我n+1</button>
+    <button @click="bye">销毁vm</button>
+</div>
+
+<script type="text/javascript">
+    //关闭开发环境提示
+    Vue.config.productionTip = false
+
+    //创建Vue实例
+    const vm = new Vue({
+        el: '#root',
+        // template: `
+        //   <div>
+        //       <h2>当前的n值是：{{n}}</h2>
+        //       <button @click="add">点我n+1</button>
+        //   </div>
+        // `,
+        data: {
+            n: 1
+        },
+        methods: {
+            add() {
+                console.log('add');
+                this.n++
+            },
+            bye() {
+                console.log('销毁vm');
+                this.$destroy();
+            }
+        },
+        watch: {
+          n() {
+              console.log('n变了')
+            }
+        },
+        beforeCreate() {
+            //无法通过vm访问到data中的数据，methods中的方法
+            console.log('beforeCreate')
+        },
+        created() {
+            //可以通过vm访问到data中的数据，methods中的方法
+            console.log('created')
+        },
+        beforeMount() {
+            //页面呈现的是未经Vue编译的DOM结构，所有对DOM的操作最终都不奏效
+            console.log('beforeMount')
+        },
+        mounted() {
+            //页面呈现的是Vue编译过的DOM结构，所有对DOM的操作均有效（Vue不推荐直接操作DOM）
+            console.log('mounted')
+        },
+        beforeUpdate() {
+            console.log('beforeUpdate')
+            //页面和数据尚未保持同步
+            //console.log(this.n)
+            //debugger;
+        },
+        updated() {
+            console.log('updated')
+            //页面和数据保持同步
+            //console.log(this.n)
+            //debugger;
+        },
+        beforeDestroy() {
+            console.log('beforeDestroy')
+            //能访问数据，能调用方法，但销毁之前对数据的所有操作都不再会触发更新
+            this.add()
+        },
+        destroyed() {
+            console.log('destroyed')
+        }
+    })
+</script>
+</body>
+</html>
