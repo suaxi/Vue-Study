@@ -300,6 +300,25 @@ v-for指令：
 
 ### 十三、收集表单数据
 
+1. `<input type="text">`，`v-model`收集的是value值，用户输入的就是value值；
+
+2. `<input type="radio">`，`v-model`收集的是value值，且要给标签配置value属性；
+
+3. `<input type="checkbox">`
+
+   （1）如果没有配置input的value属性，那么收集的是`checked`（勾选/未勾选，布尔值）；
+
+   （2）配置了input的value属性：
+
+   ​			a. `v-model`的初始值是非数组，那么收集的是`checked`（勾选/未勾选，布尔值）；
+
+   ​			b. 反之，初始值是数组，那么收集的就是value组成的数组
+
+4. 注：`v-model`的三个修饰符：
+	**lazy：**失去焦点再收集数据；
+	**number：**输入字符串转为有效的数字；
+	**trim：**输入首尾空格过滤
+
 
 
 ### 十四、过滤器
