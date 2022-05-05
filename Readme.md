@@ -516,3 +516,20 @@ v-for指令：
 （3）简写形式
 
 `const demo = Vue.extend(options)` 可简写为：`const demo = options`
+
+
+
+#### 6. VueComponent
+
+（1）demo组件本质是一个名为VueComponent的构造函数，由`Vue.extend`生成；
+
+（2）只需写`<demo>` 或 `<demo></demo>`，Vue解析时会帮我们创建demo组件的实例对象；
+
+（3）每次调用Vue.extend，返回的都是一个全新的VueComponent
+
+（4）关于**this**指向
+
++ 组件配置中：data，methods，watch，computed等函数中，它们的this指向**均是VueComponent**
++ `new Vue(options)`配置中：data，methods，watch，computed等函数中，它们的this指向**均是Vue实例对象**
+
+（5）VueComponent简称组件实例对象（vc）
