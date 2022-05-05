@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一个重要的内置关系</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<!-- vm与vc严格来说不能划等号，vc与vm接收相同的选项，如data，computed，watch，methods以及生命周期钩子函数等，但像el这样的根实例配置项仅vm有 -->
+<div id="root">
+    <school></school>
+</div>
+
+<script type="text/javascript">
+    //关闭开发环境提示
+    Vue.config.productionTip = false
+
+    const school = Vue.extend({
+        template: `
+          <div>
+              <h2>学校名称：{{schoolName}}</h2>
+              <h2>学校地址：{{address}}</h2>
+          </div>
+        `,
+        data() {
+            return {
+                schoolName: '家里蹲',
+                address: '北京'
+            }
+        }
+    })
+
+    //创建Vue实例
+    new Vue({
+        el: '#root',
+        components: {
+            school
+        }
+    })
+</script>
+</body>
+</html>
