@@ -6,7 +6,10 @@
     <script type="text/javascript" src="../js/vue.js"></script>
 </head>
 <body>
-<!-- vm与vc严格来说不能划等号，vc与vm接收相同的选项，如data，computed，watch，methods以及生命周期钩子函数等，但像el这样的根实例配置项仅vm有 -->
+<!-- vm与vc严格来说不能划等号，vc与vm接收相同的选项，如data，computed，watch，methods以及生命周期钩子函数等，但像el这样的根实例配置项仅vm有
+ 一个重要的内置关系：VueComponent.prototype.__proto__ === Vue.prototype
+ 为什么要有这个关系：让组件实例对象（vc）可以访问到Vue原型上的属性和方法
+ -->
 <div id="root">
     <school></school>
 </div>
@@ -14,6 +17,7 @@
 <script type="text/javascript">
     //关闭开发环境提示
     Vue.config.productionTip = false
+    Vue.prototype.x = 99;
 
     const school = Vue.extend({
         template: `
@@ -29,14 +33,25 @@
             }
         }
     })
+    console.log(school.prototype.__proto__.x)
 
-    //创建Vue实例
-    new Vue({
-        el: '#root',
-        components: {
-            school
-        }
-    })
+    /* //定义一个构造函数
+    function Demo() {
+        this.a = 1;
+        this.b = 2;
+    }
+    //创建一个demo的实例对象
+    const c = new Demo();
+
+    //显示原型属性
+    console.log(Demo.prototype);
+    //隐式原型属性
+    console.log(c.__proto__);
+
+    console.log(Demo.prototype === c.__proto__);
+
+    //通过显示原型属性操作原型对象，追加一个属性
+    Demo.prototype.x = 99; */
 </script>
 </body>
 </html>

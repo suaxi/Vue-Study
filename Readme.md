@@ -533,3 +533,13 @@ v-for指令：
 + `new Vue(options)`配置中：data，methods，watch，computed等函数中，它们的this指向**均是Vue实例对象**
 
 （5）VueComponent简称组件实例对象（vc）
+
+
+
+#### 7. 一个重要的内置关系
+
+````vue
+VueComponent.prototype.__proto__ === Vue.prototype
+````
+
+为什么要有这个关系：**让组件实例对象（vc）可以访问到Vue原型上的属性和方法**
