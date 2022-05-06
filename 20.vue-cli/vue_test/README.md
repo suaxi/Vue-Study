@@ -1,24 +1,7 @@
-# vue_test
+### vue-cli
 
-## Project setup
-```
-npm install
-```
+关于不同版本的Vue：
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+1. vue.js是完整版的Vue，包含核心功能+模板解析器；vue.runtime.xxx.js是运行版的Vue，只包含核心功能
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+2. 运行时Vue需要使用**render函数**接收到的`createElement`去指定具体内容

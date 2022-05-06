@@ -543,13 +543,3 @@ VueComponent.prototype.__proto__ === Vue.prototype
 ````
 
 为什么要有这个关系：**让组件实例对象（vc）可以访问到Vue原型上的属性和方法**
-
-
-
-### 十九、vue-cli
-
-关于不同版本的Vue：
-
-1. vue.js是完整版的Vue，包含核心功能+模板解析器；vue.runtime.xxx.js是运行版的Vue，只包含核心功能
-
-2. 运行时Vue需要使用**render函数**接收到的`createElement`去指定具体内容
