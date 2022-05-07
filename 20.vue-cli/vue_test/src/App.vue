@@ -1,15 +1,18 @@
 <template>
   <div>
-    <Student name="孙笑川" sex="男" :age="33"/>
+    <school/>
+    <hr>
+    <Student/>
   </div>
 </template>
 
 <script>
+import School from './components/School'
 import Student from './components/Student'
 
 export default {
   name: "App",
-  components: {Student}
+  components: {School,Student}
 }
 </script>
 
