@@ -16,3 +16,43 @@
 3. 使用方式：
    + 标识：`<h1 ref="xxx">孙笑川</h1>` 或 `<Demo ref="xxx"/>`
    + 获取：`this.$refs.xxx`
+
+
+
+### 三、props配置
+
+功能：让组件接收外部传过来的数据
+
+1. 传递数据：`<Demo name="xxx"/>`
+
+2. 接收数据：
+
+   ```vue
+   //1.简单接收
+   props: ['name','sex','age']
+   
+   //2.接收的同时对是数据进行类型限制
+   props: {
+      name: String,
+      sex: String,
+      age: Number,
+    }
+   
+   //3.类型限制，默认值指定，是否必传
+   props: {
+     name: {
+       type: String,
+       required: true
+     },
+     sex: {
+       type: String,
+       required: true
+     },
+     age: {
+       type: Number,
+       default: 99
+     }
+   }
+   ```
+
+注：props是只读的，Vue底层会监测你对propos的修改，如果进行了修改，会发出警告；若业务中确实需要修改，可以将该属性复制到data中并定义，修改后定义的数据
