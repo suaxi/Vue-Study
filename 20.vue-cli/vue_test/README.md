@@ -85,3 +85,59 @@
 （1）全局引入：`Vue.mixin(xxx)`
 
 （2）局部混入：`mixins: [xxx]`
+
+
+
+### 五、插件
+
+功能：用于增强Vue
+
+本质：包含`install`方法的一个对象，`install`的第一个参数是`vue`，第二个以后的参数是插件使用者传递的参数
+
+定义插件：
+
+```js
+//定义plugins.js
+export default {
+    install(Vue,x,y,z) {
+        console.log('插件被调用了', Vue,x,y,z)
+
+        //全局过滤器
+        Vue.filter('mySlice', function (value) {
+            return value.slice(0,3)
+        })
+
+        //自定义全局指令
+        Vue.directive('fbind', {
+            bind(element, binding) {
+                element.value = binding.value
+            },
+            inserted(element) {
+                element.focus()
+            },
+            update(element, binding) {
+                element.value = binding.value
+            }
+        })
+
+        //全局混入
+        Vue.mixin({
+            data() {
+                return {
+                    x: 100,
+                    y: 200
+                }
+            }
+        })
+
+        //给Vue原型上添加一个方法
+        Vue.prototype.hello = () => {
+            alert('给Vue原型上添加一个方法')
+        }
+    }
+}
+```
+
+使用插件：
+
+在`main.js`中`import`之后使用`Vue.use(plugin)`
