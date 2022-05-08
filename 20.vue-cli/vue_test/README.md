@@ -141,3 +141,11 @@ export default {
 使用插件：
 
 在`main.js`中`import`之后使用`Vue.use(plugin)`
+
+
+
+### 六、scoped样式
+
+作用：让样式在局部生效，防止冲突
+
+写法：`<style scoped>`
