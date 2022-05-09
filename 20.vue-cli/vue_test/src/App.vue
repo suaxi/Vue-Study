@@ -3,7 +3,7 @@
     <div class="todo-container">
       <div class="todo-wrap">
         <MyHeader :addTodo="addTodo"/>
-        <List :todos="todos"/>
+        <List :todos="todos" :checkTodo="checkTodo"/>
         <MyFooter/>
       </div>
     </div>
@@ -28,8 +28,17 @@ export default {
     }
   },
   methods: {
+    //添加
     addTodo(todoObj) {
       this.todos.unshift(todoObj)
+    },
+    //勾选/取消勾选
+    checkTodo(id) {
+      this.todos.forEach(todo => {
+        if (todo.id === id) {
+          todo.done = !todo.done
+        }
+      })
     }
   }
 }
