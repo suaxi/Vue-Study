@@ -180,3 +180,29 @@ export default {
 （1）`v-model`绑定的值不能是props传过来的值，props传递的值是**只读**属性
 
 （2）props传递的值若是对象类型，修改对象中的属性时Vue不会报错（未监测到），但不推荐这么做
+
+
+
+### 八、webStorage
+
+1. 存储内容一般5MB左右（不同浏览器之间存在差异）；
+
+2. 浏览器端通过`window.sessionStorage` 或 `window.localStorage`属性来实现本地存储机制
+
+3. API
+
+   （1）`xxxStorage.setItem(key,value)` 该方法接受一个键和值作为参数，会把键值对添加到存储中，如果键名已存在，会更新其对应的值；
+
+   （2）`xxxStorage.getItem(key)` 返回键名对应的值；
+
+   （3）`xxxStorage.removeItem(key)` 从存储中删除对应的值；
+
+   （4）`xxxStorage.clear()` 清空存储中的所有数据；
+
+4. 注：（1）`sessionStorage`存储的数据会随浏览器关闭而消失；
+
+      ​		（2）`localStorage`存储的数据需要手动清除；
+
+      ​		（3）`xxxStorage.getItem(key)` 如果对应的值不存在，则返回null；
+
+      ​		（4）`JSON.parse(null)`的结果依然为null；
