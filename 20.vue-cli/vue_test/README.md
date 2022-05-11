@@ -206,3 +206,46 @@ export default {
       ​		（3）`xxxStorage.getItem(key)` 如果对应的值不存在，则返回null；
 
       ​		（4）`JSON.parse(null)`的结果依然为null；
+
+
+
+### 九、组件的自定义事件
+
+1. 定义：一种组件间的通信方式，适用于：子传父
+
+2. 使用场景：A是父组件，B是子组件，B想给A传数据，那么就要在A中给B绑定自定义事件（<font color='red'>事件的回调在A中</font>）
+
+3. 绑定自定义事件：
+
+   （1）方式一：
+
+   ```vue
+   <Demo @getName="getName"/>
+   或
+   <Demo v-on:getName="getName"/>
+   ```
+
+   （2）方式二：
+
+   ```vue
+   <Demo ref="getName"/>
+   
+   mounted() {
+   	//this.xxx为回调方法
+   	this.$refs.getName.$on('getName', this.xxx)
+   }
+   ```
+
+   （3）若想让自定义事件只触发一次，可以使用once修饰符或$once方法
+
+4. 触发自定义事件：`this.$emit('getName', 参数)`
+
+5. 解绑自定义事件：
+
+      解绑一个：`this.$off('getName')`
+
+      解绑多个：`this.$off(['getName', 'getAge'])`
+
+6. 组件上可以使用`native`修饰符**绑定原生DOM事件**
+
+7. 注：通过`this.$refs.getName.$on('getName', this.xxx)`绑定自定义事件时，<font color='red'>回调要么配置在methods中，要么用箭头函数</font>
