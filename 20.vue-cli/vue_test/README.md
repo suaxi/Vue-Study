@@ -249,3 +249,47 @@ export default {
 6. 组件上可以使用`native`修饰符**绑定原生DOM事件**
 
 7. 注：通过`this.$refs.getName.$on('getName', this.xxx)`绑定自定义事件时，<font color='red'>回调要么配置在methods中，要么用箭头函数</font>
+
+
+
+### 十、全局事件总线（GlobalEventBus）
+
+1. 定义：一种组件间的通信方式，适用于**任意组件间通信**
+
+2. 安装全局事件总线
+
+   ```vue
+   new Vue({
+   	......
+       beforeCreate() {
+           //安装全局事件总线
+           Vue.prototype.$bus = this
+       }
+   })
+   ```
+
+3. 使用：
+
+   （1）接收数据：
+
+   A组件想接收数据，则在A组件中给`$bus`绑定自定义事件，且**回调留在A组件自身**
+
+   ```vue
+   methods: {
+   	demo(data) {
+   		......
+   	}
+   }
+   
+   mounted() {
+   	this.$bus.$on('xxx', this.demo)
+   }
+   ```
+
+   （2）提供数据：
+
+   ```vue
+   this.$bus.$emit('xxx', data)
+   ```
+
+4. 注：最好在在`beforeDestroy`钩子函数中，使用`$off('xxx')`解绑当前组件所用到的自定义事件
