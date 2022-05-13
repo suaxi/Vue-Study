@@ -260,7 +260,7 @@ export default {
 
    ```vue
    new Vue({
-   	......
+       ......
        beforeCreate() {
            //安装全局事件总线
            Vue.prototype.$bus = this
@@ -276,13 +276,13 @@ export default {
 
    ```vue
    methods: {
-   	demo(data) {
-   		......
-   	}
+       demo(data) {
+           ......
+       }
    }
    
    mounted() {
-   	this.$bus.$on('xxx', this.demo)
+       this.$bus.$on('xxx', this.demo)
    }
    ```
 
@@ -292,4 +292,28 @@ export default {
    this.$bus.$emit('xxx', data)
    ```
 
-4. 注：最好在在`beforeDestroy`钩子函数中，使用`$off('xxx')`解绑当前组件所用到的自定义事件
+4. 注：最好在`beforeDestroy`钩子函数中，使用`$off('xxx')`解绑当前组件所用到的自定义事件
+
+
+
+### 十一、消息订阅与发布（pubsub）
+
+1. 定义：一种组件间的通信方式，适用于**任意组件间通信**
+2. 引入：`npm i pubsub-js`
+3. 接收数据：
+
+```vue
+methods() {
+    demo(msgName,data) {
+        ......
+    }
+}
+
+mounted() {
+    //订阅消息
+    this.pubId = pubsub.subscribe('xxx', this.demo)
+}
+```
+
+4. 提供数据：`pubsub.publish('xxx', data)`
+5. 注：最好在`beforeDestroy`钩子函数中，使用`pubsub.unsubscribe(this.pubId)`取消订阅
