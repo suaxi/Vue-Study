@@ -317,3 +317,11 @@ mounted() {
 
 4. 提供数据：`pubsub.publish('xxx', data)`
 5. 注：最好在`beforeDestroy`钩子函数中，使用`pubsub.unsubscribe(this.pubId)`取消订阅
+
+
+
+### 十二、nextTick
+
+1. 语法：`this.$nextTick(回调函数)`
+2. 作用：在下一次DOM更新结束后执行指定的回调
+3. 什么时候用？当数据改变后，需要基于更新后的新DOM进行某些操作时，要在`nextTick`所指定的回调函数中执行
