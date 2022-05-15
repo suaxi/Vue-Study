@@ -436,7 +436,7 @@ devServer: {
    ```vue
    <!-- 父组件 -->
    <Category>
-           <template v-slot:center>
+       <template v-slot:center>
            <div>
                html结构1
            </div>
@@ -461,13 +461,13 @@ devServer: {
 
    （3）作用域插槽
 
-   ​	a. 定义：数据在组件的自身，但数据生成的结构**由组件的使用者决定**（list数据在Demo组件中，但使用数据遍历出来的结构由App组件决定）
+   ​	a. 定义：数据在组件的自身，但数据生成的结构**由组件的使用者决定**（list数据在Category 组件中，但使用数据遍历出来的结构由App组件决定）
 
    ​	b. 使用：
 
    ```vue
    <!-- 父组件 -->
-   <Category :listData="games">
+   <Category>
        <template slot-scope="{games}">
            <ul>
                <!-- 无序列表 -->
@@ -476,7 +476,7 @@ devServer: {
        </template>
    </Category>
    
-   <Category :listData="games">
+   <Category>
        <template slot-scope="{games}">
            <ol>
                <!-- 有序列表 -->
@@ -506,6 +506,6 @@ devServer: {
    </script>
    ```
 
-   
+   注：作用域插槽也可以添加`name`属性，使用时同理具名插槽
 
    

@@ -1,20 +1,20 @@
 <template>
   <div class="container">
-    <Category title="游戏" :listData="games">
+    <Category title="游戏">
       <template slot-scope="{games}">
         <ul>
           <li v-for="(item,index) in games" :key="index">{{ item }}</li>
         </ul>
       </template>
     </Category>
-    <Category title="游戏" :listData="games">
+    <Category title="游戏">
       <template slot-scope="{games}">
         <ol>
           <li v-for="(item,index) in games" :key="index">{{ item }}</li>
         </ol>
       </template>
     </Category>
-    <Category title="游戏" :listData="games">
+    <Category title="游戏">
       <template slot-scope="{games}">
         <h4 v-for="(item,index) in games" :key="index">{{ item }}</h4>
       </template>
