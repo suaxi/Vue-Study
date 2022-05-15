@@ -356,3 +356,48 @@ mounted() {
    ```
 
    （3）注：若有多个元素需要过度，则需要使用：`<transition-group>`，且每个元素都需要指定`key`值
+
+
+
+### 十四、配置代理
+
+#### 方式一
+
+在`vue.config.js`中添加如下配置：
+
+```js
+devServer: {
+    proxy: 'http://localhost:5000'
+}
+```
+
+注：（1）该方式配置简单，但不能配置多个代理，且不能灵活的控制请求是否走代理
+
+​		（2）当请求了前端不存在的资源时，那么该请求会转发给服务器（优先匹配前端资源）
+
+
+
+#### 方式二
+
+```js
+devServer: {
+  proxy: {
+    '/api': {
+      target: 'http://localhost:5000',
+      //路径重写
+      pathRewrite: {'^/api':''},
+      ws: true,
+      //用于空值请求头中的host值（默认值为true）
+      changeOrigin: true
+    },
+    '/demo': {
+      target: 'http://localhost:5001',
+      pathRewrite: {'^/demo':''},
+      ws: true,
+      changeOrigin: true
+    }
+  }
+}
+```
+
+注：可以配置多个代理和灵活的控制请求是否走代理（请求时必须加上前缀）
