@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>当前求和为：{{sum}}</h1>
+    <h1>当前求和为：{{$store.state.sum}}</h1>
     <select v-model.number="num">
       <option value="1">1</option>
       <option value="2">2</option>
@@ -21,27 +21,24 @@ export default {
     return {
       //用户选择的数字
       num: 1,
-      //当前的和
-      sum: 0,
     }
   },
   methods: {
     increment() {
-      this.sum += this.num
+      this.$store.commit('INCREMENT', this.num)
     },
     decrement() {
-      this.sum -= this.num
+      this.$store.commit('DECREMENT', this.num)
     },
     incrementOdd() {
-      if (!this.sum%2 === 0) {
-        this.sum += this.num
-      }
+      this.$store.dispatch('incrementOdd', this.num)
     },
     incrementWait() {
-      setTimeout(() => {
-        this.sum += this.num
-      }, 500)
+      this.$store.dispatch('incrementWait', this.num)
     }
+  },
+  mounted() {
+
   }
 }
 </script>
