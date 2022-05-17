@@ -710,3 +710,118 @@ export default new Vuex.Store({
 ```
 
 注：使用`mapMutations`与`mapActions `时，若需要传递参数，**需要在模板中绑定事件时就传递**，否则默认的传参为时间对象
+
+
+
+#### 6. 模块化、命名空间
+
+（1）目的：便于代码维护，数据分类更加明确
+
+（2）修改`store/index.js`
+
+**index.js**
+
+```js
+import Vue from 'vue'
+import Vuex from 'vuex'
+//求和相关
+import countOptions from './count'
+//人员管理相关
+import personOptions from './person'
+
+Vue.use(Vuex)
+
+//创建并暴露store
+export default new Vuex.Store({
+    modules: {
+        countOptions, personOptions
+    }
+})
+```
+
+**count.js**
+
+```js
+export default {
+    //开启命名空间
+    namespaced: true,
+    actions: {
+        ......
+    },
+    mutations: {
+        ......
+    },
+    state: {
+        ......
+    },
+    getters: {
+        ......
+    },
+}
+```
+
+**person.js**
+
+```js
+import axios from "axios";
+import {nanoid} from "nanoid";
+
+export default {
+    namespaced: true,
+    actions: {
+        ......
+    },
+    mutations: {
+        ......
+    },
+    state: {
+        ......
+    },
+    getters: {
+        ......
+    },
+}
+```
+
+
+
+（3）开启命名空间后：
+
++ 组件读取`state`数据
+
+  ```js
+  //方式一：直接读取
+  this.$store.state.personOptions.personList
+  //方式二：借助map方法
+  ...mapState('personOptions', ['personList'])
+  ```
+
++ 组件读取`getters`数据
+
+  ```js
+  //方式一：直接读取
+  this.$store.getters['personOptions/firstPersonName']
+  //方式二：借助map方法
+  ...mapGetters('countOptions', ['bigSum'])
+  ```
+
++ 组件调用`dispatch`方法
+
+  ```js
+  //方式一：直接调用
+  this.$store.dispatch('personOptions/addPerson', personObj)
+  //方式二：借助map方法
+  //参数在模板中绑定事件时就传递
+  ...mapActions('countOptions',['incrementOdd','incrementWait'])
+  ```
+
++ 组件调用`commit`方法
+
+  ```js
+  //方式一：直接调用
+  this.$store.commit('personOptions/ADD_PERSON', personObj)
+  //方式二：借助map方法
+  //参数在模板中绑定事件时就传递
+  ...mapMutations('countOptions',{increment:'INCREMENT',decrement:'DECREMENT'}),
+  ```
+
