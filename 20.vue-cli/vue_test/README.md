@@ -565,7 +565,7 @@ new Vue({
 })
 ```
 
-3. 基本使用：
+#### 3. 基本使用
 
 （1）配置`actions`,`mutations`,`state`
 
@@ -631,11 +631,13 @@ export default new Vuex.Store({
 
 ​	注：若没有网络请求或其他业务逻辑，组件中可以跳过`actions`（即不写`dispatch`），直接（调用`mutations`）`commit`
 
-（4）getters的使用
 
-​	a. 概念：当`state`中的数据需要经过加工后再使用时，可以使用`getters`
 
-​	b. 在`store`中追加`getters`配置
+#### 4. getters的使用
+
+（1）概念：当`state`中的数据需要经过加工后再使用时，可以使用`getters`
+
+（2）在`store`中追加`getters`配置
 
 ```js
 //用于加工state中的数据
@@ -651,4 +653,33 @@ export default new Vuex.Store({
 })
 ```
 
-​	c. 组件中读取数据：`$store.gettes.bigSum`
+（3）组件中读取数据：`$store.gettes.bigSum`
+
+
+
+#### 5. 四个map方法的使用
+
+（1）**mapState**（映射`state`中的属性为计算属性）
+
+```js
+//借助mapState生成计算属性，从state中读取数据
+//（对象写法）
+...mapState({sum:'sum',school:'school',subject:'subject'})
+
+//数组写法
+...mapState(['sum','school','subject']),
+```
+
+
+
+（2）**mapGetters**（映射`getters`中的数据为计算属性）
+
+```js
+//借助mapGetters生成计算属性，从getter中读取数据
+//（对象写法）
+...mapGetters({bigSum:'bigSum'})
+
+//数组写法
+...mapGetters(['bigSum'])
+```
+
