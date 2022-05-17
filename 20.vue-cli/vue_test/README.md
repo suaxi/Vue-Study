@@ -519,9 +519,8 @@ devServer: {
 
 #### 2. 搭建vuex环境
 
- （1）**安装（以vue2为例）**：`npm i vuex@3`
-
- （2）**index.js**
+1. **安装（以vue2为例）**：`npm i vuex@3`
+2. **index.js**
 
 ```js
 import Vue from 'vue'
@@ -566,9 +565,9 @@ new Vue({
 })
 ```
 
- （3）基本使用：
+3. 基本使用：
 
-​	a. 配置`actions`,`mutations`,`state`
+（1）配置`actions`,`mutations`,`state`
 
 ```js
 import Vue from 'vue'
@@ -626,8 +625,30 @@ export default new Vuex.Store({
 })
 ```
 
-​	b. 组件中读取`vuex`中的数据：`$store.state.sum`
+（2）组件中读取`vuex`中的数据：`$store.state.sum`
 
-​	c. 组件中修改`vuex`中的数据：`$store.dispatch('方法名（小写）', 数据)` 或 `this.$store.commit('方法名（大写）', 数据)`
+（3）组件中修改`vuex`中的数据：`$store.dispatch('方法名（小写）', 数据)` 或 `this.$store.commit('方法名（大写）', 数据)`
 
 ​	注：若没有网络请求或其他业务逻辑，组件中可以跳过`actions`（即不写`dispatch`），直接（调用`mutations`）`commit`
+
+（4）getters的使用
+
+​	a. 概念：当`state`中的数据需要经过加工后再使用时，可以使用`getters`
+
+​	b. 在`store`中追加`getters`配置
+
+```js
+//用于加工state中的数据
+const getters = {
+    bigSum(state) {
+        return state.sum * 10
+    }
+}
+
+//创建并暴露store
+export default new Vuex.Store({
+    actions,mutations,state,getters
+})
+```
+
+​	c. 组件中读取数据：`$store.gettes.bigSum`

@@ -47,7 +47,14 @@ const state = {
     sum: 0,
 }
 
+//用于加工state中的数据
+const getters = {
+    bigSum(state) {
+        return state.sum * 10
+    }
+}
+
 //创建并暴露store
 export default new Vuex.Store({
-    actions,mutations,state
+    actions,mutations,state,getters
 })
