@@ -663,7 +663,7 @@ export default new Vuex.Store({
 
 ```js
 //借助mapState生成计算属性，从state中读取数据
-//（对象写法）
+//对象写法
 ...mapState({sum:'sum',school:'school',subject:'subject'})
 
 //数组写法
@@ -676,10 +676,37 @@ export default new Vuex.Store({
 
 ```js
 //借助mapGetters生成计算属性，从getter中读取数据
-//（对象写法）
+//对象写法
 ...mapGetters({bigSum:'bigSum'})
 
 //数组写法
 ...mapGetters(['bigSum'])
 ```
 
+
+
+（3）**mapMutations** 用于帮助生成与`mutations`对话的方法，即：包含`$store.commit(xxx)`的函数
+
+```js
+//借助mapMutations生成对应的方法，方法中会调用commit去联系mutations
+//对象写法
+...mapMutations({increment:'INCREMENT',decrement:'DECREMENT'}),
+
+//数组写法
+...mapMutations(['INCREMENT','DECREMENT']),
+```
+
+
+
+（4）**mapActions **用于帮助生成与`actions`对话的方法，即：包含`$store.dispatch(xxx)`的函数
+
+```js
+//借助mapActions生成对应的方法，方法中会调用dispatch去联系actions
+//对象写法
+...mapActions({incrementOdd:'incrementOdd',incrementWait:'incrementWait'}),
+
+//数组写法
+...mapActions(['incrementOdd','incrementWait'])
+```
+
+注：使用`mapMutations`与`mapActions `时，若需要传递参数，**需要在模板中绑定事件时就传递**，否则默认的传参为时间对象
