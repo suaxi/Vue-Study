@@ -1,7 +1,7 @@
 //路由配置
 import VueRouter from 'vue-router'
-import About from '@/components/About'
-import Home from '@/components/Home'
+import About from '@/views/About'
+import Home from '@/views/Home'
 
 export default new VueRouter( {
     routes: [
