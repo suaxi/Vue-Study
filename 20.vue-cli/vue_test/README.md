@@ -825,3 +825,53 @@ export default {
   ...mapMutations('countOptions',{increment:'INCREMENT',decrement:'DECREMENT'}),
   ```
 
+
+
+### 十七、路由
+
+概念：一个路由（route）就是一组映射关系（key - value，key为路径，value为组件）
+
+，多个路由需要路由器（router）进行管理
+
+
+
+#### 1. 基本使用
+
+（1）安装（以vue2为例）：`npm i vue-router@3`
+
+（2）使用插件：`Vue.use(VueRouter)`
+
+（3）路由配置：
+
+```js
+//路由配置
+import VueRouter from 'vue-router'
+import About from '@/components/About'
+import Home from '@/components/Home'
+
+export default new VueRouter( {
+    routes: [
+        {
+            path: '/about',
+            component: About
+        },
+        {
+            path: '/about',
+            component: Home
+        }
+    ]
+})
+```
+
+（3）路由切换：
+
+```vue
+<router-link class="list-group-item" active-class="active" to="/about">About</router-link>
+```
+
+（4）指定页面展示位置：
+
+```vue
+<router-view></router-view>
+```
+
