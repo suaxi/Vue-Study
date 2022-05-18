@@ -886,3 +886,42 @@ export default new VueRouter( {
 （3）每个路由组件都有自己的**$route**属性，存储对应的路由信息；
 
 （4）整个应用只有一个**router**
+
+
+
+#### 3. 嵌套路由
+
+（1）使用`children`配置项：
+
+```js
+export default new VueRouter( {
+    routes: [
+        {
+            path: '/about',
+            component: About
+        },
+        {
+            path: '/home',
+            component: Home,
+            children: [
+                {
+                    //子路由之前不写左斜杠“/”
+                    path: 'news',
+                    component: News
+                },
+                {
+                    path: 'message',
+                    component: Message
+                }
+            ]
+        }
+    ]
+})
+```
+
+（2）跳转（要写全路径）
+
+```vue
+<router-link class="list-group-item" to="/home/news">News</router-link>
+```
+
