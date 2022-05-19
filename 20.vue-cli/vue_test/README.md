@@ -1104,3 +1104,15 @@ this.$route.params.title
 }
 ```
 
+
+
+#### 8. `<router-link>`的replace属性
+
+（1）作用：控制路由跳转时操作浏览器历史记录的模式
+
+（2）浏览器历史记录有两种写入方式（默认为`push`）：
+
++ `push`：追加历史记录
++ `replace`：替换当前记录
+
+（3）使用：`<router-link replace></router-link>`
