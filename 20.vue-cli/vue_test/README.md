@@ -954,3 +954,58 @@ this.$route.query.id
 this.$route.query.title
 ```
 
+
+
+#### 5. 命名路由
+
+（1）作用：简化路由的跳转
+
+（2）基本使用：
+
++ 命名
+
+  ```js
+  {
+      path: '/home',
+      component: Home,
+      children: [
+          {
+              //子路由之前不写左斜杠“/”
+              path: 'news',
+              component: News
+          },
+          {
+              path: 'message',
+              component: Message,
+              children: [
+                  {
+                      name: 'detail',
+                      path: 'detail',
+                      component: Detail,
+                  }
+              ]
+          }
+      ]
+  }
+  ```
+
++ 简化跳转
+
+  ```vue
+  <!-- 简化前 -->
+  <router-link to="/home/message/detail">详情</router-link>
+  
+  <!-- 简化后，直接通过名字跳转 -->
+  <router-link :to="{name:'detail'}">详情</router-link>
+  
+  <!-- 简化写法携带参数 -->
+  <router-link :to="{
+    name: 'detail',
+    query: {
+    id: m.id,
+    title: m.title
+    }
+  }">详情</router-link>
+  ```
+
+  
