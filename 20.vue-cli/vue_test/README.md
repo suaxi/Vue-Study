@@ -1008,4 +1008,59 @@ this.$route.query.title
   }">详情</router-link>
   ```
 
-  
+
+
+#### 6. 路由的params参数
+
+（1）配置路由，声明接收`params`参数
+
+```js
+{
+    path: '/home',
+    component: Home,
+    children: [
+        {
+            //子路由之前不写左斜杠“/”
+            path: 'news',
+            component: News
+        },
+        {
+            path: 'message',
+            component: Message,
+            children: [
+                {
+                    name: 'detail',
+                    //使用占位符声明接收params参数
+                    path: 'detail/:id/:title',
+                    component: Detail,
+                }
+            ]
+        }
+    ]
+}
+```
+
+（2）传递参数**（携带params时，必须使用路由名字，不能使用路径）**
+
+```vue
+<!-- 跳转路由并携带params参数，to的字符串写法 -->
+<!-- <router-link :to="`/home/message/detail/${m.id}/${m.title}`">详情</router-link> -->
+
+<!-- 跳转路由并携带params参数，to的对象写法 -->
+<router-link :to="{
+  name: 'detail',
+  //携带params时，必须使用路由名字，不能使用路径
+  params: {
+  id: m.id,
+  title: m.title
+  }
+}">详情</router-link>
+```
+
+（3）接收参数
+
+```vue
+this.$route.params.id
+this.$route.params.title
+```
+

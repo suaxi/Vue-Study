@@ -5,7 +5,7 @@
         <!-- 跳转路由并携带params参数，to的字符串写法 -->
         <!-- <router-link :to="`/home/message/detail/${m.id}/${m.title}`">{{m.title}}</router-link> -->
 
-        <!-- 跳转路由并携带params参数，to的对象写法 -->
+        <!-- 跳转路由并携带query参数，to的对象写法 -->
         <router-link :to="{
           name: 'detail',
           //携带params时，必须使用路由名字，不能使用路径
