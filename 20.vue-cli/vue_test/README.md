@@ -1154,3 +1154,53 @@ this.$router.forward()
 this.$router.go(x)
 ```
 
+
+
+#### 10. 缓存路由组件
+
+（1）作用：让不展示的路由组件保持挂载，不销毁
+
+（2）使用：
+
+```vue
+<!--1.考虑要缓存的路由在哪个组件展示
+	2.include写的必须是组件名
+	3.缓存多个组件时使用双向绑定和数组形式即可，:inclue="['x','y']"
+-->
+<keep-alive include="MyNews">
+    <router-view></router-view>
+</keep-alive>
+```
+
+
+
+#### 11. 两个新的生命周期钩子
+
+（1）作用：**路由组件所独有**，用于捕获路由组件的激活状态
+
+（2）`activated`：路由组件激活时被触发
+
+​		 `deactivated`：反之，路由组件失活时被触发
+
+（3）标题淡化Demo：
+
+```js
+//激活
+activated() {
+    console.log('News组件激活')
+    this.timer = setInterval(() => {
+        console.log('@')
+        this.opacity -= 0.01
+        if (this.opacity <= 0) {
+            this.opacity = 1
+        }
+    })
+},
+
+//失活
+deactivated() {
+    console.log('News组件失活')
+    clearInterval(this.timer)
+}
+```
+
