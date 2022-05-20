@@ -1116,3 +1116,41 @@ this.$route.params.title
 + `replace`：替换当前记录
 
 （3）使用：`<router-link replace></router-link>`
+
+
+
+#### 9. 编程式路由导航
+
+（1）作用：不借助`<router-link>`实现路由跳转
+
+（2）使用：
+
+```js
+<!-- push -->
+this.$router.push({
+    name: 'detail',
+    query: {
+        id: m.id,
+        title: m.title
+    }
+})
+
+<!-- replace -->
+    this.$router.replace({
+    name: 'detail',
+    query: {
+        id: m.id,
+        title: m.title
+    }
+})
+
+<!-- 前进 -->
+this.$router.back()
+
+<!-- 后退 -->
+this.$router.forward()
+
+<!-- 前进/后退x步（x步长） -->
+this.$router.go(x)
+```
+
