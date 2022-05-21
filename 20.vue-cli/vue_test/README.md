@@ -1204,3 +1204,91 @@ deactivated() {
 }
 ```
 
+
+
+#### 12. 路由守卫
+
+（1）作用：对路由进行权限控制
+
+（2）分类：全局、独享、组件内守卫
+
+（3）全局守卫
+
+```js
+//全局前置路由守卫，初始化及每次路由切换之前被调用
+router.beforeEach((to, from, next) => {
+    console.log('前置路由守卫', to, from)
+    //鉴权
+    if (to.meta.isAuth) {
+        if (localStorage.getItem('token') === '1') {
+            next()
+        } else {
+            alert('暂无查看权限！')
+        }
+    } else {
+        next()
+    }
+})
+
+//全局后置路由守卫，初始化及每次路由切换之后被调用
+router.afterEach((to, from) => {
+    console.log('后置路由守卫', to, from)
+    document.title = to.meta.title || 'Vue2 Demo'
+})
+```
+
+（4）独享路由守卫
+
+```js
+beforeEnter(to,from,next) {
+    console.log('独享路由守卫', to, from)
+    //鉴权
+    if (to.meta.isAuth) {
+        if (localStorage.getItem('token') === '1') {
+            next()
+        } else {
+            alert('暂无查看权限！')
+        }
+    } else {
+        next()
+    }
+}
+```
+
+（5）组件内守卫
+
+```js
+//通过路由规则，进入该组件时被调用
+beforeRouteEnter(to, from, next) {
+    console.log('About组件beforeRouteEnter', to, from)
+    //鉴权
+    if (to.meta.isAuth) {
+        if (localStorage.getItem('token') === '1') {
+            next()
+        } else {
+            alert('暂无查看权限！')
+        }
+    } else {
+        next()
+    }
+},
+
+//通过路由规则，离开该组件时被调用
+beforeRouteLeave(to, from, next) {
+    console.log('About组件beforeRouteLeave', to, from)
+    next()
+}
+```
+
+
+
+#### 13. 路由器的两种工作模式
+
+（1）`hash`值：#号及其后面的内容
+
+（2）`hash`值不会包含在`HTTP`请求中，即`hash`值不会带给后台服务器
+
+（3）`hash`与`history`的区别：
+
++ `hash`值地址栏会带着#号，兼容性好
++ `history`模式地址干净美观，兼容性相较于`hash`略差，项目上线部署时需解决刷新404的问题
