@@ -14,16 +14,23 @@ Vue3.0中一个新的配置项，值为一个函数，组件中所用到的数�
 
 #### 2. ref函数
 
-（1）作用：定义一个响应式的数据
++ 作用：定义一个响应式的数据
 
-（2）语法：`const xxx= ref(initValue)`
++ 语法：`const xxx= ref(initValue)`
+  + 创建一个包含响应式数据的引用对象（reference对象，简称ref对象）
+  + 在js中操作ref对象：`xxx.value`
+  + 在模板中读取时不需要手动写`.value`，直接`{{xxx}}`
 
-+ 创建一个包含响应式数据的引用对象（reference对象，简称ref对象）
-+ 在js中操作ref对象：`xxx.value`
-+ 在模板中读取时不需要手动写`.value`，直接`{{xxx}}`
++ 补充：
+  + 接收的数据可以是基本类型，也可以是对象类型
+  + 基本类型数据：响应式依然通过 `Object.defineProperty()` 的 `get `与`set` 完成
+  + 对象类型的数据：内部求助Vue3.0的 `reactive` 函数来实现
 
-（3）补充：
 
-+ 接收的数据可以是基本类型，也可以是对象类型
-+ 基本类型数据：响应式依然通过 `Object.defineProperty()` 的 `get `与`set` 完成
-+ 对象类型的数据：内部求助Vue3.0的 `reactive` 函数来实现
+
+#### 3. reactive函数
+
++ 作用：定义一个对象类型的响应式数据（基本类型使用ref）
++ 语法：`const 代理对象 = reactive(源对象)` 接收一个对象或数组，返回一个代理对象（即Proxy的实例对象，简称Proxy对象）
++ reactive定义的响应式数据是深层次的
++ 内部基于 ES6 的 Proxy实现，通过代理对象操作源对象内部数据进行操作
