@@ -145,4 +145,51 @@ Vue3.0中一个新的配置项，值为一个函数，组件中所用到的数�
   }
   ```
 
+
+
+#### 7. watch函数
+
++ 与Vue2.x中一致
+
++ 注意：
+
+  + 监视 `reactive`定义的响应式数据时，`oldValue` 无法正确获取，强制开启了深度监视（`deep`配置失效）
+  + 监视 `reactive`定义的响应式数据中的某个属性（对象）时：`deep` 配置有效
+
+  ```vue
+  //情况一：监视ref定义的一个数据
+  watch(sum, (newValue, oldValue) => {
+  	console.log('sum变了',newValue, oldValue)
+  })
+  
+  //情况二：监视ref定义的多个数据
+  watch([sum, msg], (newValue, oldValue) => {
+  	console.log('sum变了', newValue, oldValue)
+  }, {immediate:true})
+  
+  /*
+  情况三：监视reactive定义的一个数据中的全部属性
+  注意：1.此处无法正确获取oldValue
+  2.强制开启了深度监视（deep配置无效）
+  */
+  watch(person, (newValue, oldValue) => {
+  	console.log('person变了',newValue, oldValue)
+  }, {deep: false}) //此处的deep配置无效
+  
+  //情况四：监视reactive定义的一个数据中的某个属性
+  watch(() => person.name, (newValue, oldValue) => {
+  	console.log('person变了',newValue, oldValue)
+  })
+  
+  //情况五：监视reactive定义的一个数据中的某些属性
+  watch([() => person.name, () => person.age], (newValue, oldValue) => {
+  	console.log('person变了',newValue, oldValue)
+  })
+  
+  //特殊情况
+  watch(() => person.job, (newValue, oldValue) => {
+  	console.log('person变了',newValue, oldValue)
+  }, {deep:true}) //此处由于监视的是reactive定义的对象中某个属性，所以deep配置有效
+  ```
+
   
