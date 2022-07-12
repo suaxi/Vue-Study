@@ -100,3 +100,49 @@ Vue3.0中一个新的配置项，值为一个函数，组件中所用到的数�
     + attrs：值为对象，包含组件外部传递过来，但没有在 `props` 配置中声明的属性，相当于 `this.$attrs`
     + slots：收到的插槽内容，相当于 `this.$slots`
     + emit：分发自定义事件的函数，相当于 `this.$emit`
+
+
+
+#### 6. computed计算属性
+
++ 与Vue2.x中一致
+
++ 示例：
+
+  ```vue
+  import {computed, reactive} from "vue";
+  
+  export default {
+    name: 'MyDemo',
+    setup() {
+      //数据
+      let person = reactive({
+        firstName: '孙',
+        lastName: '笑川'
+      })
+  
+      //计算属性（简写）
+      // person.fullName = computed(() => {
+      //   return person.firstName + '-' + person.lastName
+      // })
+  
+      //计算属性（完整写法）
+      person.fullName = computed({
+        get() {
+          return person.firstName + '-' + person.lastName
+        },
+        set(value) {
+          const nameArr = value.split('-')
+          person.firstName = nameArr[0]
+          person.lastName = nameArr[1]
+        }
+      })
+  
+      return {
+        person
+      }
+    }
+  }
+  ```
+
+  
