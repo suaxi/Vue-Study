@@ -283,3 +283,10 @@ export default {
 </script>
 ```
 
+
+
+#### 10. 自定义hook函数
+
++ 本质是一个函数，把 `setup` 中使用的Composition API进行了封装
++ 类似于Vue2.x中的`mixin`
++ 优势：代码复用，逻辑清晰
