@@ -332,3 +332,70 @@ export default {
   + 应用场景：
     + 有些值不应被设置为响应式的，如复杂的第三方类库
     + 当渲染的对象是不可变数据源的复杂/大列表时，跳过响应式转换可以提高性能
+
+
+
+####  4. customRef
+
++ 作用：自定义 `ref` ，并对其依赖项跟踪和更新触发进行显示控制
+
++ 实现防抖效果：
+
+  ```vue
+  <template>
+    <br>
+    <input type="text" v-model="keyWord">
+    <h3>{{keyWord}}</h3>
+  </template>
+  
+  <script>
+  import {customRef, ref} from "vue";
+  
+  export default {
+    name: 'MyDemo',
+    setup() {
+      //数据
+      //Vue提供的ref
+      //let keyWord = ref('你好')
+  
+      function myRef(value, delay) {
+        return customRef((track, trigger) => {
+          let timer
+          return {
+            get() {
+              console.log(`有人从自定义的myRef容器中读取了数据，value:[${value}]`)
+              //通知Vue追踪value的变化
+              track()
+              //2.读取
+              return value
+            },
+            set(newValue) {
+              console.log(`有人修改了自定义myRef容器中的数据，newValue:[${newValue}]`)
+              clearTimeout(timer)
+              timer = setTimeout(() => {
+                //1.设置值
+                value = newValue
+                //3.通知Vue重新解析模板
+                trigger()
+              }, delay)
+            }
+          }
+        })
+      }
+  
+      //使用自定义的ref
+      let keyWord = myRef('你好', 500)
+  
+      return {
+        keyWord
+      }
+    }
+  }
+  </script>
+  
+  <style scoped>
+  
+  </style>
+  ```
+
+  
