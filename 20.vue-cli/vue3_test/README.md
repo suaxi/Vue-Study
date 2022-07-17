@@ -10,6 +10,8 @@ Vue3.0中一个新的配置项，值为一个函数，组件中所用到的数�
 
 （2）返回一个渲染函数：可以自定义渲染内容
 
+（3）注：`setup` 不能是一个 `async` 函数，因为返回值不再是 `return` 的对象，而是 `Promise`，模板看不到 `return`对象中的属性（后期可以是返回 `Promise` 实例，但需要 `Suspense` 和异步组件的配合）
+
 
 
 #### 2. ref函数
@@ -479,4 +481,37 @@ export default {
   </teleport>
   ```
 
+  
+
+#### 3. Suspense
+
++ 等待异步组件时渲染定义的缺省内容，提升用户体验
+
++ 实现：
+
+  + 引入异步组件
+
+  ```vue
+  import {defineAsyncComponent} from "vue";
+  const Child = defineAsyncComponent(() => import('./components/Child'))
+  ```
+
+  + 使用 `Suspense` 包裹组件，并配置好 `default` 和 `fallback`
+  ```vue
+  <template>
+    <div class="app">
+      <h3>App组件</h3>
+    <Suspense>
+        <template v-slot:default>
+          <Child/>
+        </template>
+        <template v-slot:fallback>
+          <h3>加载中...</h3>
+        </template>
+      </Suspense>
+    </div>
+  </template>
+  ```
+  
+  
   
