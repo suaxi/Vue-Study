@@ -434,3 +434,49 @@ export default {
 + isReactive：检查是否是 `reactive` 对象
 + isReadOnly：检查一个对象是否是由 `readOnly` 创建的**只读代理对象**
 + isProxy：检查一个对象是否是由 `reactive` 或 `readOnly` 创建的代理对象
+
+
+
+### 三、Composition API的优势
+
+#### 1. Options API存在的问题
+
+在传统 `Options API` 中，新增或修改一个需求，需要分别在 `data, methods, computed` 中修改
+
+
+
+#### 2. Composition APi的优势
+
+可以更方便、严谨的组织业务代码、逻辑，让相关功能的代码更加有序的组织在一起
+
+
+
+### 四、新的组件
+
+#### 1. Fragment
+
++ Vue2：组件必须有一个根标签
++ Vue3：组件可以没有根标签，内部会将多个标签包含在一个 `Fragment` 虚拟元素中
++ 减少标签层间，性能优化
+
+
+
+#### 2. Teleport
+
++ 概念：将 `组件html结构` 移动到指定位置
+
+  ```vue
+  <teleport to="body">
+      <div v-if="isShow" class="mask">
+          <div class="dialog">
+              <h3>你好</h3>
+              <h4>孙笑川</h4>
+              <h4>药水哥</h4>
+              <h4>Giao哥</h4>
+              <button @click="isShow = false">关闭弹窗</button>
+          </div>
+      </div>
+  </teleport>
+  ```
+
+  
