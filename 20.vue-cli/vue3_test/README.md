@@ -398,4 +398,32 @@ export default {
   </style>
   ```
 
+
+
+
+#### 5. provide与inject
+
++ 作用：实现**祖组件**与**后代组件**间的通信
+
++ 实现：
+
+  ```vue
+  <!-- 祖组件 -->
+  setup() {
+  	......
+      let car = reactive({name: '马自达', price: '10w'})
+      //给后代组件传递数据
+      provide('car', car)
+  	......
+  }
+  
+  <!-- 后代组件 -->
+  setup() {
+  	......
+      let car = inject('car')
+      return {car}
+  	......
+  }
+  ```
+
   
