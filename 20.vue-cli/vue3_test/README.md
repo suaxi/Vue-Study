@@ -426,4 +426,11 @@ export default {
   }
   ```
 
-  
+
+
+#### 6. 响应式数据的判断
+
++ isRef：检查是否是 `ref` 对象
++ isReactive：检查是否是 `reactive` 对象
++ isReadOnly：检查一个对象是否是由 `readOnly` 创建的**只读代理对象**
++ isProxy：检查一个对象是否是由 `reactive` 或 `readOnly` 创建的代理对象
